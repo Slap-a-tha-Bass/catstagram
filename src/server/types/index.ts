@@ -12,5 +12,5 @@ export interface pgResponse {
   command: string;
   rowCount: number;
   oid: string;
-  rows: string[];
+  rows: Object[];
 }

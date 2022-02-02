@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS catstagram.users
 ALTER TABLE IF EXISTS catstagram.users
     OWNER to postgres_admin;
 
-CREATE TABLE posts (
+CREATE TABLE IF EXISTS catstagram.posts (
     id VARCHAR(60) NOT NULL,
     user_id VARCHAR(60) NOT NULL,
     img_url VARCHAR(255) NOT NULL,

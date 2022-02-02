@@ -1,5 +1,6 @@
 import * as express from 'express';
 import apiRouter from './routes';
+import './db/index';
 
 const app = express();
 
