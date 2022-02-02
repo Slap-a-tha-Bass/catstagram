@@ -8,9 +8,17 @@ export interface Users {
   isVerified?: number;
   _created?: Date;
 }
+export interface Posts {
+  id: string;
+  user_id: string;
+  img_url: string;
+  caption: string;
+  _created: Date;
+}
 export interface pgResponse {
   command: string;
   rowCount: number;
   oid: string;
   rows: Object[];
+  fields: Object[];
 }
