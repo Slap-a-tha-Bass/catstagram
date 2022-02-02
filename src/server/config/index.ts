@@ -8,3 +8,8 @@ export const pgConfig = {
   database: process.env.DB_NAME,
   host: process.env.DB_HOST,
 };
+
+export const jwtConfig = {
+  secret: process.env.JWT_SECRET,
+  expires: process.env.JWT_EXPIRES,
+};

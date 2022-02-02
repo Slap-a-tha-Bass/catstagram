@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { generateHash } from "../../utils/passwords";
 import db from "../../db/queries/users";
 import { Users } from "../../types";
+import { createRegisterToken } from "../../utils/tokens";
 
 const router = Router();
 
@@ -23,9 +24,11 @@ router.post("/", async (req, res, next) => {
       password: hashed,
     };
     const register = await db.create_user(newUser);
-    res.json({ register, hashed });
+    createRegisterToken(register, email, res);
   } catch (error) {
-    console.log(error, error.message);
+    res
+      .status(500)
+      .json({ message: "Error in registration router.", error: error.message });
   }
 });
 export default router;

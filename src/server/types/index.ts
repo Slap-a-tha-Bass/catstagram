@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface Users {
   id: string;
   first_name: string;
@@ -21,4 +23,10 @@ export interface pgResponse {
   oid: string;
   rows: Object[];
   fields: Object[];
+}
+export interface ReqUser extends Request {
+  user?: Users;
+  userid?: string;
+  email?: string;
+  username?: string;
 }
