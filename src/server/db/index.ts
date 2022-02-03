@@ -35,7 +35,7 @@ export const Query = <T = pgResponse>(queryString: string, values?: any) => {
       if (error) {
         reject(error);
       } else {
-        resolve(results);
+        resolve(results.rows);
       }
     });
   });

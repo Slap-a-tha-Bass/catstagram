@@ -1,9 +1,12 @@
 import { Query } from "..";
 import { Users } from "../../types";
 
-// TODO: find_user query to assign to api>users.ts
+// * find_user query @ passport-strategies.ts
 
 const get_users = () => Query<Users[]>("SELECT * FROM catstagram.users");
+
+const find_user = (userEmail: string) =>
+  Query<Users[]>(`SELECT * FROM catstagram.users WHERE email = '${userEmail}'`);
 
 const create_user = (newUser: Users) =>
   Query(`INSERT INTO catstagram.users SET ?`, [newUser]);
@@ -11,5 +14,5 @@ const create_user = (newUser: Users) =>
 export default {
   get_users,
   create_user,
+  find_user,
 };
-
