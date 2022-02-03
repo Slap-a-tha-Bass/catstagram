@@ -6,16 +6,12 @@ const router = Router();
 
 // * router for current user
 
-router.get(
-  "/",
-  passport.authenticate("local"),
-  async (req: ReqUser, res, next) => {
-    try {
-      res.json(`Welcome, ${req.user.email}`);
-    } catch (error) {
-      console.log(error);
-    }
+router.get("/", async (req: ReqUser, res, next) => {
+  try {
+    res.json(`Welcome, ${req.user.email}`);
+  } catch (error) {
+    console.log(error);
   }
-);
+});
 
 export default router;

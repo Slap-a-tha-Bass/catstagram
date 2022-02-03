@@ -8,10 +8,17 @@ import { Users } from "../types";
 import db from "../db/queries/users";
 
 export const configurePassport = (app: Application) => {
+
+  // * think of this as who is currently logging in
+
   passport.serializeUser((user: Users, done) => {
+
+    // * deletes the password before sending the information to db
+
     user.password ? delete user.password : null;
     done(null, user);
   });
+  
   passport.deserializeUser((user, done) => done(null, user));
 
   passport.use(
@@ -21,14 +28,13 @@ export const configurePassport = (app: Application) => {
       },
       async (email, password, done) => {
         try {
-          const [userFound] = (await db.find_user(email));
-            console.log(userFound.email);
+          const [userFound] = await db.find_user(email);
+
           if (!userFound || !compareHash(password, userFound.password)) {
             done(null, false);
           } else {
             done(null, userFound);
           }
-          
         } catch (error) {
           done(error);
         }

@@ -7,9 +7,8 @@ import { createLoginToken } from "../../utils/tokens";
 const router = Router();
 
 router.post("/", passport.authenticate("local"), async (req, res, next) => {
-  const { email } = req.body;
   try {
-    createLoginToken(<ReqUser>req, res);
+    createLoginToken(req, res);
   } catch (error) {
     res
       .status(500)

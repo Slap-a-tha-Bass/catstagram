@@ -35,6 +35,7 @@ export const Query = <T = pgResponse>(queryString: string, values?: any) => {
       if (error) {
         reject(error);
       } else {
+        // * important distinction between Postgres and MySQL (adding .rows)
         resolve(results.rows);
       }
     });
