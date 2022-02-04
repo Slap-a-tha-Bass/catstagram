@@ -4,12 +4,14 @@ import { ThemeProvider } from "styled-components";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Home from "./views/Home";
+import Posts from "./views/Posts";
+import Details from "./views/Details";
 import Messages from "./views/Messages";
 import Login from "./views/Login";
 import Register from "./views/Register";
+import NotFound from "./views/NotFound";
 
-const App = ({ children }: any) => {
+const App = () => {
   const [theme, setTheme] = useState("dark");
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
@@ -17,16 +19,18 @@ const App = ({ children }: any) => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route index element={<Posts />} />
+          <Route>
+            <Route path="posts/:postid" element={<Details />} />
+            <Route path="messages" element={<Messages />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
   );
 };
-
-interface AppProps {}
 
 export default App;
