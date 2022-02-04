@@ -13,7 +13,7 @@ export const createLoginToken = (req: ReqUser, res: any) => {
 };
 export const createRegisterToken = (register: any, email: string, res: any) => {
   const token = jwt.sign(
-    { user_id: register.rowCount, email },
+    { user_id: register.rows.id, email },
     jwtConfig.secret,
     { expiresIn: jwtConfig.expires }
   );

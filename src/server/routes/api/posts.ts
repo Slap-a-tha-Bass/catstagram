@@ -11,9 +11,12 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    res.json(`test post router`);
+    const posts = await db.get_posts();
+    res.json(posts);
   } catch (error) {
-    console.log(error);
+    res
+      .status(500)
+      .json({ message: "Error in posts.ts", error: error.message });
   }
 });
 router.post(
@@ -23,7 +26,12 @@ router.post(
     const { img_url, caption } = req.body;
     try {
       const id = uuidv4();
-      const newPost: Posts = { id, user_id: req.user.user_id, img_url, caption };
+      const newPost: Posts = {
+        id,
+        user_id: req.user.user_id,
+        img_url,
+        caption,
+      };
       await db.create_post(newPost);
       res.json({ message: "New post created!", id: id });
     } catch (error) {

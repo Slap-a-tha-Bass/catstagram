@@ -1,6 +1,7 @@
 import { Router } from "express";
 import * as passport from "passport";
 import { ReqUser } from "../../types";
+import db from '../../db/queries/users';
 
 const router = Router();
 
@@ -8,7 +9,9 @@ const router = Router();
 
 router.get("/", async (req: ReqUser, res, next) => {
   try {
-    res.json(`Welcome, ${req.user.email}`);
+    const users = await db.get_users();
+    res.json(users);
+    // res.json(`Welcome, ${req.user.email}`);
   } catch (error) {
     console.log(error);
   }

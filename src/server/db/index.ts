@@ -26,7 +26,6 @@ export const Query = <T = pgResponse>(queryString: string, values?: any) => {
 
     text = `${pre_sql} (${prop_names}) VALUES (${placeholders})`;
     values = Object.values(values[0]);
-    console.log({ text, values });
   }
   // * return promise with formatted text
   
@@ -58,7 +57,6 @@ export const QueryRows = <T = pgResponse>(queryString: string, values?: any) => 
 
     text = `${pre_sql} (${prop_names}) VALUES (${placeholders})`;
     values = Object.values(values[0]);
-    console.log({ text, values });
   }
   // * return promise with formatted text
   
