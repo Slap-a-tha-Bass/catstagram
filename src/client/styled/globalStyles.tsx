@@ -31,40 +31,40 @@ h6 {
   text-transform: capitalize;
   color: ${({ theme }) => theme && theme.secondary}
 }
-
+<img src="../../photos/cat-emoji.jpeg" alt="cat" />
 h1 {
   font-size: 2.75rem;
-
+  text-transform: lowercase;
   margin: 0.75rem 0;
 }
 
 h2 {
   font-size: 2.25rem;
-
+  text-transform: lowercase;
   margin: 0.75rem 0;
 }
 
 h3 {
   font-size: 2rem;
-
+  text-transform: lowercase;
   margin: 0.75rem 0;
 }
 
 h4 {
   font-size: 1.75rem;
-
+  text-transform: lowercase;
   margin: 0.75rem 0;
 }
 
 h5 {
   font-size: 1.5rem;
-
+  text-transform: lowercase;
   margin: 0.75rem 0;
 }
 
 h6 {
   font-size: 1rem;
-
+  text-transform: lowercase;
   margin: 0.75rem 0;
 }
 
@@ -96,19 +96,19 @@ export const Button = styled.button`
 `;
 
 interface GlobalProps {
-    theme: {
-        primary: string;
-        secondary: string;
-        info: string;
-        fonts: {
-            primary: string;
-            secondary: string;
-            heading: string;
-        }
-        bgColor: string;
-        text: string;
-    }
-  fonts: string;
-  bgColor: string;
-  text: string;
+  theme?: {
+    primary?: string;
+    secondary?: string;
+    info?: string;
+    fonts?: {
+      primary?: string;
+      secondary?: string;
+      heading?: string;
+    };
+    bgColor?: string;
+    text?: string;
+  };
+  fonts?: string;
+  bgColor?: string;
+  text?: string;
 }

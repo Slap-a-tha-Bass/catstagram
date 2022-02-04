@@ -8,14 +8,14 @@ const styles = {
   export const darkTheme = {
     title: "Dark",
     primary: `rgba(35,35,35, 0.3)`,
-    secondary: `rgb(117, 31, 255)`,
-    info: `rgb(117, 31, 255)`,
+    secondary: `rgb(230, 230, 230)`,
+    info: `rgb(211, 211, 211)`,
     dark: `black`,
     text: `#fff`,
     bgColor: `linear-gradient(
       344deg,
-      rgba(6, 6, 6, 1) 0%,
-      rgba(20, 20, 20, 1) 100%
+      #9020b3 0%,
+      #5939b4 100%
     )`,
     ...styles,
   };

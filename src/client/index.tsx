@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { render } from 'react-dom';
-import App from './App';
-import './styled';
+import * as React from "react";
+import { render } from "react-dom";
+import App from "./App";
+import "./styled";
 
 render(<App />, document.getElementById("root"));
