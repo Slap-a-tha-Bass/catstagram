@@ -4,7 +4,7 @@ import { jwtConfig } from "../config";
 
 export const createLoginToken = (req: ReqUser, res: any) => {
   const token = jwt.sign(
-    { userid: req.user.id, email: req.user.email },
+    { user_id: req.user.id, email: req.user.email },
     jwtConfig.secret,
     { expiresIn: jwtConfig.expires }
   );
@@ -13,10 +13,11 @@ export const createLoginToken = (req: ReqUser, res: any) => {
 };
 export const createRegisterToken = (register: any, email: string, res: any) => {
   const token = jwt.sign(
-    { userid: register.rowCount, email },
+    { user_id: register.rowCount, email },
     jwtConfig.secret,
     { expiresIn: jwtConfig.expires }
   );
+  console.log({ register });
   res.json({ register, token });
   return;
 };

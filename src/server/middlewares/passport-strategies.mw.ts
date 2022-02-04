@@ -4,7 +4,7 @@ import * as PassportLocal from "passport-local";
 import { Application } from "express";
 import { compareHash } from "../utils/passwords";
 import { jwtConfig } from "../config";
-import { Users } from "../types";
+import { ReqUser, Users } from "../types";
 import db from "../db/queries/users";
 
 export const configurePassport = (app: Application) => {
@@ -18,7 +18,7 @@ export const configurePassport = (app: Application) => {
     user.password ? delete user.password : null;
     done(null, user);
   });
-  
+
   passport.deserializeUser((user, done) => done(null, user));
 
   passport.use(
@@ -28,7 +28,7 @@ export const configurePassport = (app: Application) => {
       },
       async (email, password, done) => {
         try {
-          const [userFound] = await db.find_user(email);
+          const [userFound] = (await db.find_user(email));
 
           if (!userFound || !compareHash(password, userFound.password)) {
             done(null, false);
@@ -48,7 +48,7 @@ export const configurePassport = (app: Application) => {
         jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
         secretOrKey: jwtConfig.secret,
       },
-      (payload, done) => {
+      (payload: ReqUser, done) => {
         try {
           done(null, payload);
         } catch (error) {

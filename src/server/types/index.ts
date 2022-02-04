@@ -9,13 +9,14 @@ export interface Users {
   password?: string;
   isVerified?: number;
   _created?: Date;
+  user_id?: string;
 }
 export interface Posts {
   id: string;
   user_id: string;
   img_url: string;
   caption: string;
-  _created: Date;
+  _created?: Date;
 }
 export interface pgResponse {
   command?: string;
