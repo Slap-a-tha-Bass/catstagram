@@ -5,4 +5,6 @@ export interface IPost {
   caption: string;
   _created: Date;
   username: string;
+  first_name: string;
+  last_name: string;
 }

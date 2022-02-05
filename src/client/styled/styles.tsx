@@ -14,8 +14,8 @@ const styles = {
     text: `#fff`,
     bgColor: `linear-gradient(
       344deg,
-      #9020b3 0%,
-      #5939b4 100%
+      #8000f8 0%,
+      #1900a8 100%
     )`,
     ...styles,
   };

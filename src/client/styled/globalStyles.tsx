@@ -31,7 +31,6 @@ h6 {
   text-transform: capitalize;
   color: ${({ theme }) => theme && theme.secondary}
 }
-<img src="../../photos/cat-emoji.jpeg" alt="cat" />
 h1 {
   font-size: 2.75rem;
   text-transform: lowercase;

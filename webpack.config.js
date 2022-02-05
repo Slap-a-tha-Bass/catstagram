@@ -49,7 +49,7 @@ const clientConfig = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpeg|gif)$/i,
         use: ["file-loader", "img-loader"],
       },
     ],
