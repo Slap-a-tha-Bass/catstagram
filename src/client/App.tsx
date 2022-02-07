@@ -10,6 +10,8 @@ import Messages from "./views/Messages";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import NotFound from "./views/NotFound";
+import Profile from "./views/Profile";
+import Private from "./components/Private";
 
 const App = () => {
   const [theme, setTheme] = useState("dark");
@@ -19,12 +21,15 @@ const App = () => {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route index element={<Posts />} />
           <Route>
-            <Route path="posts/:postid" element={<Details />} />
             <Route path="messages" element={<Messages />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+          </Route>
+          <Route path="/" element={<Private />}>
+            <Route index element={<Posts />} />
+            <Route path="posts/:postid" element={<Details />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
