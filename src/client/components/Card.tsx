@@ -17,7 +17,8 @@ const FlexStartDiv = styled.div`
 `;
 const CardContainer = styled.div`
   width: 440px;
-  border: 5px solid #9f3bfd;
+  background-color: rgba(15,15,15,0.3);
+  border: 5px solid rgba(15,15,15,0.3);
   border-radius: 10px;
   padding: 1rem;
 `;
@@ -39,7 +40,7 @@ const Card = ({
       <Container>
         <CardContainer>
           <FlexStartDiv>
-            <h4>{username}</h4>
+            <h4>@{username}</h4>
           </FlexStartDiv>
           <FlexStartDiv>
             <h6>

@@ -9,6 +9,18 @@ const router = Router();
 
 // * router for current user
 
+router.get("/:postid", async (req, res, next) => {
+  try {
+    const postid = req.params.postid;
+    const post = await db.get_one_post(postid);
+    res.json(post);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error in posts.ts", error: error.message });
+  }
+});
+
 router.get("/", async (req, res, next) => {
   try {
     const posts = await db.get_posts();
