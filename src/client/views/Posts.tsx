@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { IPost } from "../../types";
 import Card from "../components/Card";
+import apiService from "../utils/api-service";
 
 const Posts = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
 
   useEffect(() => {
-    fetch("/api/posts")
-      .then((res) => res.json())
-      .then((posts) => {
-        setPosts(posts.rows);
-      });
+    apiService("/api/posts").then((posts) => setPosts(posts.rows));
   }, []);
 
   return (

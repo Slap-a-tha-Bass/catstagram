@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import apiService from "../utils/api-service";
+import { Form, CenterDiv, Label, Input, Button, H1 } from "./Login";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,69 +14,75 @@ const Register = () => {
 
   const handleRegister = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    try {
-      const res = await fetch("/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      if (res.ok) {
-        const token = await res.json();
-        localStorage.setItem("token", token.token);
-        navigate(`/profile`);
-      } else {
-        throw new Error("Invalid register");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const token = await apiService("/auth/register", "POST", values);
+    localStorage.setItem("token", token.token);
+    navigate("/profile");
   };
   return (
     <div>
-      <h1>Register</h1>
-      <form>
-        <div>
-          <label htmlFor="first_name">first name</label>
-          <input
+      <CenterDiv>
+        <H1>Register</H1>
+      </CenterDiv>
+      <Form>
+        <CenterDiv>
+          <Label htmlFor="first_name">first name</Label>
+        </CenterDiv>
+        <CenterDiv>
+          <Input
             name="first_name"
+            type="text"
             value={values.first_name || ""}
             onChange={handleChanges}
           />
-        </div>
-        <div>
-          <label htmlFor="last_name">last name</label>
-          <input
+        </CenterDiv>
+        <CenterDiv>
+          <Label htmlFor="last_name">last name</Label>
+        </CenterDiv>
+        <CenterDiv>
+          <Input
             name="last_name"
+            type="text"
             value={values.last_name || ""}
             onChange={handleChanges}
           />
-        </div>
-        <div>
-          <label htmlFor="email">email</label>
-          <input
+        </CenterDiv>
+        <CenterDiv>
+          <Label htmlFor="email">email</Label>
+        </CenterDiv>
+        <CenterDiv>
+          <Input
             name="email"
+            type="text"
             value={values.email || ""}
             onChange={handleChanges}
           />
-        </div>
-        <div>
-          <label htmlFor="username">username</label>
-          <input
+        </CenterDiv>
+        <CenterDiv>
+          <Label htmlFor="username">username</Label>
+        </CenterDiv>
+        <CenterDiv>
+          <Input
             name="username"
+            type="text"
             value={values.username || ""}
             onChange={handleChanges}
           />
-        </div>
-        <div>
-          <label htmlFor="password">password</label>
-          <input
+        </CenterDiv>
+        <CenterDiv>
+          <Label htmlFor="password">password</Label>
+        </CenterDiv>
+        <CenterDiv>
+          <Input
             name="password"
+            type="password"
             value={values.password || ""}
             onChange={handleChanges}
           />
-        </div>
-        <button onClick={handleRegister}>Register</button>
-      </form>
+        </CenterDiv>
+        <CenterDiv>
+          <Button onClick={handleRegister}>Register</Button>
+        </CenterDiv>
+      </Form>
     </div>
   );
 };

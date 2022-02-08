@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import apiService from "../utils/api-service";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,47 +16,79 @@ const Login = () => {
 
   const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    try {
-      const res = await fetch("/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      if (res.ok) {
-        const token = await res.json();
-        localStorage.setItem("token", token);
-        navigate(`/profile`);
-      } else {
-        throw new Error("Invalid Login");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const token = await apiService("/auth/login", "POST", values);
+    localStorage.setItem("token", token);
+    navigate("/profile");
   };
   return (
     <div>
-      <h1>Login</h1>
-      <form>
-        <div>
-          <label htmlFor="email">email</label>
-          <input
+      <CenterDiv>
+        <H1>Login</H1>
+      </CenterDiv>
+      <Form>
+        <CenterDiv>
+          <Label htmlFor="email">email</Label>
+        </CenterDiv>
+        <CenterDiv>
+          <Input
             name="email"
+            type="email"
             value={values.email || ""}
             onChange={handleChanges}
           />
-        </div>
-        <div>
-          <label htmlFor="password">password</label>
-          <input
+        </CenterDiv>
+        <CenterDiv>
+          <Label htmlFor="password">password</Label>
+        </CenterDiv>
+        <CenterDiv>
+          <Input
             name="password"
+            type="password"
             value={values.password || ""}
             onChange={handleChanges}
           />
-        </div>
-        <button onClick={handleLogin}>Login</button>
-      </form>
+        </CenterDiv>
+        <CenterDiv>
+          <Button onClick={handleLogin}>login</Button>
+        </CenterDiv>
+      </Form>
     </div>
   );
 };
 
 export default Login;
+
+export const CenterDiv = styled.div`
+  display: flex;
+  place-content: center;
+`;
+export const Label = styled.label`
+  font-size: 1.5rem;
+`;
+export const Input = styled.input`
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 350px;
+`;
+export const Button = styled.button`
+  padding: 1rem;
+  margin-top: 1rem;
+  font-family: monospace;
+  background-color: white;
+  font-size: 1.5rem;
+  color: rgb(117, 31, 255);
+  border: none;
+  border-radius: 10px;
+`;
+export const Form = styled.form`
+  padding: 1rem;
+  margin-top: 1rem;
+`;
+export const H1 = styled.h1`
+  margin-top: 2rem;
+`;
+export const TextArea = styled.textarea`
+  padding: 0.5rem;
+  margin: 0.5rem;
+  width: 350px;
+`;
