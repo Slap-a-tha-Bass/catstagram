@@ -17,11 +17,14 @@ const FlexStartDiv = styled.div`
 `;
 const CardContainer = styled.div`
   width: 440px;
-  background-color: rgba(15,15,15,0.3);
-  border: 5px solid rgba(15,15,15,0.3);
+  background-color: rgba(15, 15, 15, 0.3);
+  border: 5px solid rgba(15, 15, 15, 0.3);
   border-radius: 10px;
   padding: 1rem;
 `;
+const Caption = styled.div`
+  padding-top: 1.5rem;
+`
 const CustomLink = styled(Link)`
   text-decoration: none;
 `;
@@ -52,9 +55,7 @@ const Card = ({
               <img src={img_url} alt={altText} width={350} height={400} />
             </div>
           </CenterDiv>
-          <CenterDiv>
-            <div>{caption}</div>
-          </CenterDiv>
+          <Caption>{caption}</Caption>
         </CardContainer>
       </Container>
     </CustomLink>
