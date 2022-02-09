@@ -53,4 +53,24 @@ router.post(
     }
   }
 );
+router.delete(
+  "/:postid",
+  passport.authenticate("jwt"),
+  async (req: ReqUser, res, next) => {
+    const { postid } = req.params;
+    const { user_id } = req.user;
+    try {
+      const deleted_post = await db.destroy(postid, user_id);
+      if (deleted_post.rowCount === 1) {
+        res.json({ message: "Post successfully deleted!", ...deleted_post });
+      } else {
+        res.status(401).json({ message: "Unauthorized user." });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Error in posts.ts", error: error.message });
+    }
+  }
+);
 export default router;

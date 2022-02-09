@@ -1,5 +1,5 @@
-import React from "react";
-import { Navigate, Route, Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
 const Private = ({ children }: IPrivate) => {
   const token = localStorage.getItem("token");

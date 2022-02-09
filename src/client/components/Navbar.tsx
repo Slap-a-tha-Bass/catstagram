@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaCat, FaUserAlt } from "react-icons/fa";
+import { Button } from "../views/Login";
 
 const NavContainer = styled.div`
   display: flex;
@@ -22,8 +23,11 @@ const Span2 = styled.span`
 const Align = styled.div`
   display: flex;
   align-items: center;
-`
+`;
 const Navbar = () => {
+  const handleSignOut = (e: React.MouseEvent<HTMLButtonElement>) => {
+    localStorage.removeItem("token");
+  };
   return (
     <NavContainer>
       <Logo>

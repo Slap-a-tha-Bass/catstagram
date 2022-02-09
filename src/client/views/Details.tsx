@@ -20,6 +20,7 @@ const Details = () => {
     <div>
       {isLoaded && (
         <Card
+          isLink
           key={post.id}
           img_url={post.img_url}
           altText={post.caption}
@@ -28,9 +29,7 @@ const Details = () => {
           username={post.username}
           first_name={post.first_name}
           last_name={post.last_name}
-        >
-          {post.caption}
-        </Card>
+        />
       )}
     </div>
   );

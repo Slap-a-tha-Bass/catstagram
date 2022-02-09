@@ -15,10 +15,15 @@ const posts_by_user = (user_id: string) =>
   Query(`SELECT * FROM catstagram.posts WHERE user_id = '${user_id}'`);
 const create_post = (newPost: Posts) =>
   Query(`INSERT INTO catstagram.posts SET ?`, [newPost]);
+const destroy = (postid: string, user_id: string) =>
+  Query(
+    `DELETE FROM catstagram.posts WHERE id = '${postid}' AND user_id = '${user_id}'`
+  );
 
 export default {
   get_posts,
   get_one_post,
   create_post,
   posts_by_user,
+  destroy,
 };

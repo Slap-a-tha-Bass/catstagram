@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Users } from "../../server/types";
-import { IPost } from "../../types";
+import { Link } from "react-router-dom";
+import Card from "../components/Card";
 import apiService from "../utils/api-service";
+import { Button, CenterDiv } from "./Login";
 
 const Profile = () => {
   const [info, setInfo] = useState<IProfileInfo>(null);
@@ -16,12 +17,27 @@ const Profile = () => {
 
   return (
     <div>
-      {info && <h1>Welcome {info.profile.username}!</h1>}
+      {info && (
+        <CenterDiv>
+          <h3>Welcome {info.profile.username}!</h3>
+        </CenterDiv>
+      )}
+      <CenterDiv>
+        <Link to="/compose">
+          <Button>new post</Button>
+        </Link>
+      </CenterDiv>
       {userPosts.map((post) => (
-        <div key={post.id}>
-          <p>{post.img_url}</p>
-          <p>{post.caption}</p>
-        </div>
+        <Card
+          key={post.id}
+          img_url={post.img_url}
+          altText={post.caption}
+          postid={post.id}
+          caption={post.caption}
+          username={info.profile.username}
+          first_name={info.profile.first_name}
+          last_name={info.profile.last_name}
+        />
       ))}
     </div>
   );

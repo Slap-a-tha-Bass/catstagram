@@ -70,15 +70,18 @@ export const Input = styled.input`
   margin: 0.5rem;
   width: 350px;
 `;
-export const Button = styled.button`
-  padding: 1rem;
+export const Button = styled.button<ButtonProps>`
+  padding: ${(props) => props.padding || 1}rem;
   margin-top: 1rem;
   font-family: monospace;
   background-color: white;
-  font-size: 1.5rem;
+  font-size: ${props => props.fontSize || 1.5}rem;
   color: rgb(117, 31, 255);
   border: none;
   border-radius: 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 export const Form = styled.form`
   padding: 1rem;
@@ -92,3 +95,8 @@ export const TextArea = styled.textarea`
   margin: 0.5rem;
   width: 350px;
 `;
+
+interface ButtonProps {
+  padding?: number;
+  fontSize?: number;
+}
