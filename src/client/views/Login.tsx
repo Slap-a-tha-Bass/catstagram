@@ -72,11 +72,11 @@ export const Input = styled.input`
 `;
 export const Button = styled.button<ButtonProps>`
   padding: ${(props) => props.padding || 1}rem;
-  margin-top: 1rem;
+  margin-top: ${props => props.marginTop || 1}rem;
   font-family: monospace;
-  background-color: white;
-  font-size: ${props => props.fontSize || 1.5}rem;
-  color: rgb(117, 31, 255);
+  background-color: ${(props) => props.bgColor || "white"};
+  font-size: ${(props) => props.fontSize || 1.5}rem;
+  color: ${(props) => props.color || "rgb(117, 31, 255)"};
   border: none;
   border-radius: 10px;
   &:hover {
@@ -99,4 +99,7 @@ export const TextArea = styled.textarea`
 interface ButtonProps {
   padding?: number;
   fontSize?: number;
+  bgColor?: string;
+  color?: string;
+  marginTop?: number;
 }

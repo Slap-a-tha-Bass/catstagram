@@ -3,6 +3,12 @@ import { IPost } from "../../types";
 import Card from "../components/Card";
 import apiService from "../utils/api-service";
 import { CenterDiv } from "./Login";
+import styled from "styled-components";
+
+const FlexWrap = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
 
 const Posts = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
@@ -14,7 +20,7 @@ const Posts = () => {
       setIsLoaded(true);
     });
   }, []);
-  if (posts && posts.length === 0)
+  if (isLoaded && posts && posts.length === 0 )
     return (
       <CenterDiv>
         <h1>No posts...</h1>
@@ -23,12 +29,12 @@ const Posts = () => {
   if (!isLoaded)
     return (
       <CenterDiv>
-        <h1>Loading...</h1>
+        <h6>Loading...</h6>
       </CenterDiv>
     );
   return (
     <div>
-      {posts?.map((post) => (
+      {isLoaded && posts?.map((post) => (
         <Card
           isLink
           key={post.id}

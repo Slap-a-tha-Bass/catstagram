@@ -20,9 +20,9 @@ const FlexStartDiv = styled.div`
   justify-content: flex-start;
 `;
 const CardContainer = styled.div`
-  width: 440px;
-  background-color: rgba(15, 15, 15, 0.3);
-  border: 5px solid rgba(15, 15, 15, 0.3);
+  width: 85vw;
+  background-color: rgba(15, 15, 15, 0.4);
+  border: 5px solid rgba(15, 15, 15, 0.4);
   border-radius: 10px;
   padding: 1rem;
 `;
@@ -35,6 +35,10 @@ const CustomLink = styled(Link)`
 const SpaceOutDiv = styled.div`
   display: flex;
   place-content: space-between;
+`;
+const IMG = styled.img`
+  width: ${(props) => props.width || 75}vw;
+  height: ${(props) => props.height || 75}vw;
 `;
 const Card = ({
   img_url,
@@ -71,20 +75,13 @@ const Card = ({
           <Container>
             <CardContainer>
               <FlexStartDiv>
-                <h4>@{username}</h4>
-              </FlexStartDiv>
-              <FlexStartDiv>
-                <h6>
-                  {first_name} {last_name}
-                </h6>
+                <span>@{username}</span>
               </FlexStartDiv>
               <CenterDiv>
                 <div>
-                  <img
+                  <IMG
                     src={img_url}
                     alt={altText}
-                    width={350}
-                    height={400}
                     style={{ borderRadius: "10px" }}
                   />
                 </div>
@@ -97,24 +94,34 @@ const Card = ({
         <Container>
           <CardContainer>
             <SpaceOutDiv>
-              <h4>@{username}</h4>
-              <Button onClick={handleDeletePost} padding={0.25} fontSize={2}>
+              <span>@{username}</span>
+              <Button
+                onClick={handleDeletePost}
+                bgColor={`rgba(117, 31, 255, 0.1)`}
+                color={"white"}
+                padding={0.25}
+                fontSize={2}
+              >
                 <TiDeleteOutline />
               </Button>
             </SpaceOutDiv>
-            <FlexStartDiv>
-              <h6>
-                {first_name} {last_name}
-              </h6>
-            </FlexStartDiv>
             <CenterDiv>
               <div>
-                <img src={img_url} alt={altText} width={350} height={400} />
+                <IMG
+                  src={img_url}
+                  alt={altText}
+                  style={{ borderRadius: "10px" }}
+                />
               </div>
             </CenterDiv>
             <SpaceOutDiv>
               <Caption>{caption}</Caption>
-              <Button padding={0.25} fontSize={2}>
+              <Button
+                bgColor={`rgba(117, 31, 255, 0.1)`}
+                color={"white"}
+                padding={0.25}
+                fontSize={2}
+              >
                 <AiOutlineEdit />
               </Button>
             </SpaceOutDiv>

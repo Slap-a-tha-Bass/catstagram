@@ -19,12 +19,14 @@ const Profile = () => {
     <div>
       {info && (
         <CenterDiv>
-          <h3>Welcome {info.profile.username}!</h3>
+          <h3>{info.profile.first_name}'s posts</h3>
         </CenterDiv>
       )}
       <CenterDiv>
         <Link to="/compose">
-          <Button>new post</Button>
+          <Button bgColor={`rgba(15, 15, 15, 0.4)`} color={"white"}>
+            new post
+          </Button>
         </Link>
       </CenterDiv>
       {userPosts.map((post) => (
