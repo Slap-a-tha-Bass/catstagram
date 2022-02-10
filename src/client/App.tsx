@@ -13,6 +13,7 @@ import NotFound from "./views/NotFound";
 import Profile from "./views/Profile";
 import Private from "./components/Private";
 import Compose from "./views/Compose";
+import Edit from "./views/Edit";
 
 const App = () => {
   const [theme, setTheme] = useState("dark");
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="posts/:postid" element={<Details />} />
             <Route path="profile" element={<Profile />} />
             <Route path="compose" element={<Compose />} />
+            <Route path="edit/:postid" element={<Edit />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

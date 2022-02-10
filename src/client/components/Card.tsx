@@ -20,7 +20,7 @@ const FlexStartDiv = styled.div`
   justify-content: flex-start;
 `;
 const CardContainer = styled.div`
-  width: 85vw;
+  width: 95vw;
   background-color: rgba(15, 15, 15, 0.4);
   border: 5px solid rgba(15, 15, 15, 0.4);
   border-radius: 10px;
@@ -75,7 +75,7 @@ const Card = ({
           <Container>
             <CardContainer>
               <FlexStartDiv>
-                <span>@{username}</span>
+                <h5>@{username}</h5>
               </FlexStartDiv>
               <CenterDiv>
                 <div>
@@ -94,7 +94,7 @@ const Card = ({
         <Container>
           <CardContainer>
             <SpaceOutDiv>
-              <span>@{username}</span>
+              <h5>@{username}</h5>
               <Button
                 onClick={handleDeletePost}
                 bgColor={`rgba(117, 31, 255, 0.1)`}
@@ -121,8 +121,11 @@ const Card = ({
                 color={"white"}
                 padding={0.25}
                 fontSize={2}
+                marginTop={1}
               >
-                <AiOutlineEdit />
+                <Link to={`/edit/${postid}`}>
+                  <AiOutlineEdit />
+                </Link>
               </Button>
             </SpaceOutDiv>
           </CardContainer>

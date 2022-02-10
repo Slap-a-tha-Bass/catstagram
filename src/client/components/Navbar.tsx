@@ -65,7 +65,7 @@ const Navbar = () => {
           <Button
             onClick={handleSignOut}
             bgColor={`rgba(117, 31, 255, 0.1)`}
-            color={"white"}
+            color={"whitesmoke"}
             padding={0.25}
             fontSize={1}
             marginTop={0.01}

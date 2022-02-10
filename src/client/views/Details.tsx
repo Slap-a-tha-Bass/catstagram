@@ -14,7 +14,7 @@ const Details = () => {
       setPost(posts.rows[0]);
       setIsLoaded(true);
     });
-  }, []);
+  }, [postid]);
 
   return (
     <div>
