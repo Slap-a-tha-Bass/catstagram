@@ -53,6 +53,23 @@ router.post(
     }
   }
 );
+router.put(
+  "/edit/:postid",
+  passport.authenticate("jwt"),
+  async (req: ReqUser, res, next) => {
+    const { postid } = req.params;
+    const { user_id } = req.user;
+    const { img_url, caption } = req.body;
+    try {
+      const editedPost = await db.update(caption, user_id, postid, img_url);
+      res.json({ message: "Edited post!", id: postid, editedPost });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Error in posts.ts > put", error: error.message });
+    }
+  }
+);
 router.delete(
   "/:postid",
   passport.authenticate("jwt"),

@@ -12,10 +12,10 @@ export interface Users {
   user_id?: string;
 }
 export interface Posts {
-  id: string;
-  user_id: string;
-  img_url: string;
-  caption: string;
+  id?: string;
+  user_id?: string;
+  img_url?: string;
+  caption?: string;
   _created?: Date;
 }
 export interface pgResponse {
@@ -28,4 +28,14 @@ export interface pgResponse {
 export interface ReqUser extends Request {
   user?: Users;
   userid?: string;
+}
+export interface IPost {
+  id: string;
+  user_id: string;
+  img_url: string;
+  caption: string;
+  _created: Date;
+  username: string;
+  first_name: string;
+  last_name: string;
 }

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import apiService from "../utils/api-service";
 import { Button, CenterDiv, Form, H1, Input, Label, TextArea } from "./Login";
 
 const Edit = () => {
   const { postid } = useParams<{ postid: string }>();
-
+  const navigate = useNavigate();
   const [values, setValues] = useState<{ [key: string]: string }>({});
   const handleChanges = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -20,9 +20,16 @@ const Edit = () => {
       console.log(values.rows[0]);
     });
   }, [postid]);
-  const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleEdit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("Button clicked edit page");
+    if (confirm("Are you sure you want to edit?")) {
+      const data = await apiService(`/api/posts/edit/${postid}`, "PUT", values);
+      if (data.editedPost.rowCount === 0) {
+        alert("Did not update!");
+      } else {
+        navigate("/profile");
+      }
+    }
   };
   return (
     <div>
