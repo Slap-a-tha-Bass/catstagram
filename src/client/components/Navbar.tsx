@@ -34,7 +34,7 @@ const LI = styled.li`
 `;
 const Navbar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+
   const [isAuthed, setIsAuthed] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -42,6 +42,9 @@ const Navbar = () => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsAuthed(true);
+    }
+    if (location.pathname === "/login") {
+      setIsAuthed(false);
     }
   }, [location.pathname]);
 
@@ -56,41 +59,41 @@ const Navbar = () => {
           </Link>
         </div>
       </Logo>
-        <Button
-          onClick={() => setMenuOpen(!isMenuOpen)}
-          bgColor="rgba(117, 31, 255, 0.01)"
-          color="whitesmoke"
-          fontSize={2}
-          padding={0.5}
-          marginTop={0}
-        >
-          {isMenuOpen && (
-            <UL>
-              <LI>
-                <Link to="/profile">
-                  <div>
-                    <FaUserAlt />
-                  </div>
-                </Link>
-              </LI>
-              {isAuthed ? (
-                <LI>
-                  <Link to="/signout">sign out</Link>
-                </LI>
-              ) : (
+      <Button
+        onClick={() => setMenuOpen(!isMenuOpen)}
+        bgColor="rgba(117, 31, 255, 0.01)"
+        color="whitesmoke"
+        fontSize={2}
+        padding={0.5}
+        marginTop={0}
+      >
+        {isMenuOpen && (
+          <UL>
+            <LI>
+              <Link to="/profile">
                 <div>
-                  <LI>
-                    <Link to="/login">login</Link>
-                  </LI>
-                  <LI>
-                    <Link to="/register">register</Link>
-                  </LI>
+                  <FaUserAlt />
                 </div>
-              )}
-            </UL>
-          )}
-          {!isMenuOpen && <CgMenuRightAlt />}
-        </Button>
+              </Link>
+            </LI>
+            {isAuthed ? (
+              <LI>
+                <Link to="/signout">sign out</Link>
+              </LI>
+            ) : (
+              <div>
+                <LI>
+                  <Link to="/login">login</Link>
+                </LI>
+                <LI>
+                  <Link to="/register">register</Link>
+                </LI>
+              </div>
+            )}
+          </UL>
+        )}
+        {!isMenuOpen && <CgMenuRightAlt />}
+      </Button>
     </NavContainer>
   );
 };

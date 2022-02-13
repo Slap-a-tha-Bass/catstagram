@@ -10,6 +10,7 @@ const FlexAround = styled.div`
 
 const SignOut = () => {
   const navigate = useNavigate();
+
   const handleSignOut = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (confirm(`Are you sure you want to sign out?`)) {
       localStorage.removeItem("token");
