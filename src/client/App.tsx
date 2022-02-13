@@ -14,6 +14,7 @@ import Profile from "./views/Profile";
 import Private from "./components/Private";
 import Compose from "./views/Compose";
 import Edit from "./views/Edit";
+import SignOut from "./views/SignOut";
 
 const App = () => {
   const [theme, setTheme] = useState("dark");
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="posts/:postid" element={<Details />} />
             <Route path="profile" element={<Profile />} />
             <Route path="compose" element={<Compose />} />
+            <Route path="signout" element={<SignOut />} />
             <Route path="edit/:postid" element={<Edit />} />
           </Route>
           <Route path="*" element={<NotFound />} />

@@ -3,15 +3,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FaCat, FaUserAlt } from "react-icons/fa";
 import { Button } from "../views/Login";
-import apiService from "../utils/api-service";
+import { CgMenuRightAlt } from "react-icons/cg";
 
 const NavContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
 `;
 const Logo = styled.div`
   font-size: 1.5rem;
+  margin-top: 1.5rem;
 `;
 const Span = styled.span`
   color: #9f3bfd;
@@ -21,14 +22,21 @@ const Span2 = styled.span`
   color: #ffffff;
   text-decoration: wavy underline;
 `;
-const Align = styled.div`
-  display: flex;
-  align-items: center;
+const UL = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+`;
+const LI = styled.li`
+  font-size: 1.5rem;
+  margin: 0 auto;
+  text-align: right;
 `;
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isAuthed, setIsAuthed] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -36,13 +44,6 @@ const Navbar = () => {
       setIsAuthed(true);
     }
   }, [location.pathname]);
-
-  const handleSignOut = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (confirm(`Are you sure you want to sign out?`)) {
-      localStorage.removeItem("token");
-      navigate("/login");
-    }
-  };
 
   return (
     <NavContainer>
@@ -55,29 +56,41 @@ const Navbar = () => {
           </Link>
         </div>
       </Logo>
-      <Align>
-        <Link to="/profile">
-          <div>
-            <FaUserAlt />
-          </div>
-        </Link>
-        {isAuthed ? (
-          <Button
-            onClick={handleSignOut}
-            bgColor={`rgba(117, 31, 255, 0.1)`}
-            color={"whitesmoke"}
-            padding={0.25}
-            fontSize={1}
-            marginTop={0.01}
-          >
-            sign out
-          </Button>
-        ) : (
-          <Link to="/login">login</Link>
-        )}
-
-        <Link to="/register">register</Link>
-      </Align>
+        <Button
+          onClick={() => setMenuOpen(!isMenuOpen)}
+          bgColor="rgba(117, 31, 255, 0.01)"
+          color="whitesmoke"
+          fontSize={2}
+          padding={0.5}
+          marginTop={0}
+        >
+          {isMenuOpen && (
+            <UL>
+              <LI>
+                <Link to="/profile">
+                  <div>
+                    <FaUserAlt />
+                  </div>
+                </Link>
+              </LI>
+              {isAuthed ? (
+                <LI>
+                  <Link to="/signout">sign out</Link>
+                </LI>
+              ) : (
+                <div>
+                  <LI>
+                    <Link to="/login">login</Link>
+                  </LI>
+                  <LI>
+                    <Link to="/register">register</Link>
+                  </LI>
+                </div>
+              )}
+            </UL>
+          )}
+          {!isMenuOpen && <CgMenuRightAlt />}
+        </Button>
     </NavContainer>
   );
 };
