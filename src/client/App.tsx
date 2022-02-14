@@ -16,6 +16,7 @@ import Compose from "./views/Compose";
 import Edit from "./views/Edit";
 import SignOut from "./views/SignOut";
 import Search from "./views/Search";
+import Delete from "./views/Delete";
 
 const App = () => {
   const [theme, setTheme] = useState("dark");
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="compose" element={<Compose />} />
             <Route path="signout" element={<SignOut />} />
             <Route path="edit/:postid" element={<Edit />} />
+            <Route path="delete/:postid" element={<Delete />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

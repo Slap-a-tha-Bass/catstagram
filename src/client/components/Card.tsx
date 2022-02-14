@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { TiDeleteOutline } from "react-icons/ti";
 import { AiOutlineEdit } from "react-icons/ai";
+import { FaEllipsisH, FaChevronRight, FaTrashAlt } from "react-icons/fa";
 import { Button } from "../views/Login";
-import apiService from "../utils/api-service";
+import { LI, UL } from "./Navbar";
 
 const Container = styled.div`
   display: flex;
@@ -15,9 +15,9 @@ const CenterDiv = styled.div`
   display: flex;
   justify-content: center;
 `;
-const FlexStartDiv = styled.div`
+const FlexEndDiv = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
 `;
 const CardContainer = styled.div`
   width: 95vw;
@@ -28,6 +28,7 @@ const CardContainer = styled.div`
 `;
 const Caption = styled.div`
   padding-top: 1.5rem;
+  margin-left: 1rem;
 `;
 const CustomLink = styled(Link)`
   text-decoration: none;
@@ -35,10 +36,15 @@ const CustomLink = styled(Link)`
 const SpaceOutDiv = styled.div`
   display: flex;
   place-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
 `;
 const IMG = styled.img`
   width: ${(props) => props.width || 75}vw;
   height: ${(props) => props.height || 75}vw;
+`;
+const TextAlign = styled.div`
+  text-align: right;
 `;
 const Card = ({
   img_url,
@@ -51,32 +57,17 @@ const Card = ({
   isLink,
 }: ICard) => {
   const navigate = useNavigate();
-  const handleDeletePost = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (
-      confirm(
-        `Are you sure you want to delete this post, ${username || first_name}?`
-      )
-    ) {
-      const deletePost = await apiService(
-        `/api/posts/${postid}`,
-        "DELETE",
-        postid
-      );
-      if (deletePost.rowCount === 1) {
-        alert("Post successfully deleted!");
-        navigate("/");
-      }
-    }
-  };
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
   return (
     <div>
       {isLink ? (
         <CustomLink to={`/posts/${postid}`}>
           <Container>
             <CardContainer>
-              <FlexStartDiv>
+              <Caption>
                 <h5>@{username}</h5>
-              </FlexStartDiv>
+              </Caption>
               <CenterDiv>
                 <div>
                   <IMG
@@ -95,15 +86,6 @@ const Card = ({
           <CardContainer>
             <SpaceOutDiv>
               <h5>@{username}</h5>
-              <Button
-                onClick={handleDeletePost}
-                bgColor={`rgba(117, 31, 255, 0.1)`}
-                color={"white"}
-                padding={0.25}
-                fontSize={2}
-              >
-                <TiDeleteOutline />
-              </Button>
             </SpaceOutDiv>
             <CenterDiv>
               <div>
@@ -114,20 +96,36 @@ const Card = ({
                 />
               </div>
             </CenterDiv>
-            <SpaceOutDiv>
-              <Caption>{caption}</Caption>
+            <Caption>{caption}</Caption>
+            <FlexEndDiv>
               <Button
-                bgColor={`rgba(117, 31, 255, 0.1)`}
-                color={"white"}
-                padding={0.25}
+                onClick={() => setMenuOpen(!isMenuOpen)}
+                bgColor="rgba(117, 31, 255, 0.01)"
+                color="whitesmoke"
                 fontSize={2}
-                marginTop={1}
+                padding={0.5}
+                marginTop={0}
               >
-                <Link to={`/edit/${postid}`}>
-                  <AiOutlineEdit />
-                </Link>
+                {!isMenuOpen && <FaEllipsisH />}
+                {isMenuOpen && (
+                  <UL display="flex">
+                    <LI>
+                      <Link to={`/edit/${postid}`}>
+                        <AiOutlineEdit />
+                      </Link>
+                    </LI>
+                    <LI>
+                      <Link to={`/delete/${postid}`}>
+                        <FaTrashAlt />
+                      </Link>
+                    </LI>
+                    <LI>
+                      <FaChevronRight />
+                    </LI>
+                  </UL>
+                )}
               </Button>
-            </SpaceOutDiv>
+            </FlexEndDiv>
           </CardContainer>
         </Container>
       )}

@@ -22,12 +22,13 @@ const Span2 = styled.span`
   color: #ffffff;
   text-decoration: wavy underline;
 `;
-const UL = styled.ul`
+export const UL = styled.ul<ULProps>`
+  display: ${props => props.display || "block"};
   list-style-type: none;
   padding: 0;
   margin: 0;
 `;
-const LI = styled.li`
+export const LI = styled.li`
   font-size: 1.5rem;
   margin: 0.5rem 0.5rem;
   text-align: right;
@@ -101,3 +102,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+interface ULProps {
+  display?: string;
+}
