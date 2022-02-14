@@ -1,4 +1,4 @@
-import { Query } from "..";
+import { Query, QueryRows } from "..";
 import { Posts } from "../../types";
 
 // * find_user query @ passport-strategies.ts
@@ -15,13 +15,22 @@ const posts_by_user = (user_id: string) =>
   Query(`SELECT * FROM catstagram.posts WHERE user_id = '${user_id}'`);
 const create_post = (newPost: Posts) =>
   Query(`INSERT INTO catstagram.posts SET ?`, [newPost]);
-const update = (caption: string, user_id: string, postid: string, img_url: string) =>
+const update = (
+  caption: string,
+  user_id: string,
+  postid: string,
+  img_url: string
+) =>
   Query(
     `UPDATE catstagram.posts SET caption = '${caption}', img_url = '${img_url}' WHERE id = '${postid}' AND user_id = '${user_id}'`
   );
 const destroy = (postid: string, user_id: string) =>
   Query(
     `DELETE FROM catstagram.posts WHERE id = '${postid}' AND user_id = '${user_id}'`
+  );
+const search = (searchTerm: string) =>
+  Query(
+    `SELECT posts.*, catstagram.users.username, catstagram.users.first_name, catstagram.users.last_name FROM catstagram.posts JOIN catstagram.users ON users.id = catstagram.posts.user_id WHERE users.username LIKE '%${searchTerm}%'`
   );
 
 export default {
@@ -31,4 +40,5 @@ export default {
   posts_by_user,
   update,
   destroy,
+  search,
 };

@@ -19,7 +19,7 @@ router.post("/", async (req, res, next) => {
       id,
       first_name,
       last_name,
-      username,
+      username: username.toLowerCase(),
       email,
       password: hashed,
     };

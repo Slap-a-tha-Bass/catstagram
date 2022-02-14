@@ -15,6 +15,7 @@ import Private from "./components/Private";
 import Compose from "./views/Compose";
 import Edit from "./views/Edit";
 import SignOut from "./views/SignOut";
+import Search from "./views/Search";
 
 const App = () => {
   const [theme, setTheme] = useState("dark");
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/" element={<Private />}>
             <Route index element={<Posts />} />
             <Route path="posts/:postid" element={<Details />} />
+            <Route path="posts/search" element={<Search />} />
             <Route path="profile" element={<Profile />} />
             <Route path="compose" element={<Compose />} />
             <Route path="signout" element={<SignOut />} />

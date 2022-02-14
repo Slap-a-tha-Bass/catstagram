@@ -29,7 +29,7 @@ const UL = styled.ul`
 `;
 const LI = styled.li`
   font-size: 1.5rem;
-  margin: 0 auto;
+  margin: 0.5rem 0.5rem;
   text-align: right;
 `;
 const Navbar = () => {
@@ -70,11 +70,13 @@ const Navbar = () => {
         {isMenuOpen && (
           <UL>
             <LI>
-              <Link to="/profile">
-                <div>
-                  <FaUserAlt />
-                </div>
-              </Link>
+              <Link to="/">home</Link>
+            </LI>
+            <LI>
+              <Link to="/posts/search">search</Link>
+            </LI>
+            <LI>
+              <Link to="/profile">profile</Link>
             </LI>
             {isAuthed ? (
               <LI>

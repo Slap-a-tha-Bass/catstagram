@@ -9,14 +9,13 @@ const Register = () => {
 
   const handleChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.persist();
-    setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setValues((prev) => ({ ...prev, [e.target.name]: (e.target.value) }));
   };
 
   const handleRegister = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const token = await apiService("/auth/register", "POST", values);
-    localStorage.setItem("token", token.token);
-    navigate("/profile");
+    await apiService("/auth/register", "POST", values);
+    navigate("/login");
   };
   return (
     <div>
