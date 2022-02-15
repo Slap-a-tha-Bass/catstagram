@@ -39,3 +39,10 @@ export interface IPost {
   first_name: string;
   last_name: string;
 }
+export interface IComments {
+  id?: string;
+  user_id?: string;
+  post_id?: string;
+  content?: string;
+  _created?: Date;
+}
