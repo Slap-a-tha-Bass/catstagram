@@ -65,10 +65,10 @@ export const CenterDiv = styled.div`
 export const Label = styled.label`
   font-size: 1.5rem;
 `;
-export const Input = styled.input`
+export const Input = styled.input<InputProps>`
   padding: 0.5rem;
   margin: 0.5rem;
-  width: 350px;
+  width: ${props => props.width || 350}px;
 `;
 export const Button = styled.button<ButtonProps>`
   padding: ${(props) => props.padding || 1}rem;
@@ -102,4 +102,7 @@ interface ButtonProps {
   bgColor?: string;
   color?: string;
   marginTop?: number;
+}
+interface InputProps {
+  width?: number;
 }

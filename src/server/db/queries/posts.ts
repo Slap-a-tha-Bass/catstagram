@@ -30,7 +30,7 @@ const destroy = (postid: string, user_id: string) =>
   );
 const search = (searchTerm: string) =>
   Query(
-    `SELECT posts.*, catstagram.users.username, catstagram.users.first_name, catstagram.users.last_name FROM catstagram.posts JOIN catstagram.users ON users.id = catstagram.posts.user_id WHERE users.username LIKE '%${searchTerm}%'`
+    `SELECT posts.*, catstagram.users.username, catstagram.users.first_name, catstagram.users.last_name FROM catstagram.posts JOIN catstagram.users ON users.id = catstagram.posts.user_id WHERE users.username LIKE '${searchTerm}%'`
   );
 
 export default {

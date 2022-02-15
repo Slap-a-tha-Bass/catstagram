@@ -1,38 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { FaCat, FaUserAlt } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
+import styled, { keyframes } from "styled-components";
+import { FaCat } from "react-icons/fa";
 import { Button } from "../views/Login";
 import { CgMenuRightAlt } from "react-icons/cg";
 
-const NavContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-`;
-const Logo = styled.div`
-  font-size: 1.5rem;
-  margin-top: 1.5rem;
-`;
-const Span = styled.span`
-  color: #9f3bfd;
-  text-decoration: wavy underline;
-`;
-const Span2 = styled.span`
-  color: #ffffff;
-  text-decoration: wavy underline;
-`;
-export const UL = styled.ul<ULProps>`
-  display: ${props => props.display || "block"};
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-`;
-export const LI = styled.li`
-  font-size: 1.5rem;
-  margin: 0.5rem 0.5rem;
-  text-align: right;
-`;
 const Navbar = () => {
   const location = useLocation();
 
@@ -70,19 +42,21 @@ const Navbar = () => {
       >
         {isMenuOpen && (
           <UL>
-            <LI>
-              <Link to="/">home</Link>
-            </LI>
-            <LI>
-              <Link to="/posts/search">search</Link>
-            </LI>
-            <LI>
-              <Link to="/profile">profile</Link>
-            </LI>
             {isAuthed ? (
-              <LI>
-                <Link to="/signout">sign out</Link>
-              </LI>
+              <div>
+                <LI>
+                  <Link to="/">home</Link>
+                </LI>
+                <LI>
+                  <Link to="/posts/search">search</Link>
+                </LI>
+                <LI>
+                  <Link to="/profile">profile</Link>
+                </LI>
+                <LI>
+                  <Link to="/signout">sign out</Link>
+                </LI>
+              </div>
             ) : (
               <div>
                 <LI>
@@ -106,3 +80,43 @@ export default Navbar;
 interface ULProps {
   display?: string;
 }
+const NavContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+const Logo = styled.div`
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+`;
+const Span = styled.span`
+  color: #9f3bfd;
+  text-decoration: wavy underline;
+`;
+const Span2 = styled.span`
+  color: #ffffff;
+  text-decoration: wavy underline;
+`;
+const moveInRight = keyframes`
+    0% {
+      opacity: 0;
+      transform: translateX(3rem);
+    }
+    
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+    `;
+export const UL = styled.ul<ULProps>`
+  display: ${(props) => props.display || "block"};
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  animation: ${moveInRight} 0.5s ease-in-out 0.3s both;
+`;
+export const LI = styled.li`
+  font-size: 1.5rem;
+  margin: 0.5rem 0.5rem;
+  text-align: right;
+`;

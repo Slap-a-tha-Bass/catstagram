@@ -9,7 +9,7 @@ import { BsSearch } from "react-icons/bs";
 const SearchIcon = styled.div`
   display: flex;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 const Search = () => {
@@ -25,16 +25,11 @@ const Search = () => {
   }, []);
   useEffect(() => {
     if (!searchTerm.length) return;
-    apiService(`/api/posts/search?term=${searchTerm}`).then((posts) =>
-      setPosts(posts)
-    );
+    apiService(`/api/posts/search?searchTerm=${searchTerm}`).then((posts) => {
+      setPosts(posts);
+    });
   }, [searchTerm]);
-  if (isLoaded && posts && posts.length === 0)
-    return (
-      <CenterDiv>
-        <h1>No posts...</h1>
-      </CenterDiv>
-    );
+
   if (!isLoaded)
     return (
       <CenterDiv>
@@ -54,16 +49,18 @@ const Search = () => {
           <SearchIcon>
             <BsSearch />
             <Input
-              placeholder="search user or caption..."
+              placeholder="search username..."
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              width={250}
             />
           </SearchIcon>
         </Form>
       </CenterDiv>
       {isLoaded &&
-        filteredPosts.map((post) => (
+        filteredPosts &&
+        filteredPosts?.map((post) => (
           <Card
             isLink
             key={post.id}

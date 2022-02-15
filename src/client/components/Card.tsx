@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineEdit } from "react-icons/ai";
 import { FaEllipsisH, FaChevronRight, FaTrashAlt } from "react-icons/fa";
@@ -11,52 +11,17 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const CenterDiv = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-const FlexEndDiv = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-const CardContainer = styled.div`
-  width: 95vw;
-  background-color: rgba(15, 15, 15, 0.4);
-  border: 5px solid rgba(15, 15, 15, 0.4);
-  border-radius: 10px;
-  padding: 1rem;
-`;
-const Caption = styled.div`
-  padding-top: 1.5rem;
-  margin-left: 1rem;
-`;
-const CustomLink = styled(Link)`
-  text-decoration: none;
-`;
-const SpaceOutDiv = styled.div`
-  display: flex;
-  place-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-`;
-const IMG = styled.img`
-  width: ${(props) => props.width || 75}vw;
-  height: ${(props) => props.height || 75}vw;
-`;
-const TextAlign = styled.div`
-  text-align: right;
-`;
 const Card = ({
   img_url,
   altText,
   postid,
   caption,
   username,
-  first_name,
-  last_name,
   isLink,
+  width,
+  height,
+  containerWidth,
 }: ICard) => {
-  const navigate = useNavigate();
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -64,16 +29,18 @@ const Card = ({
       {isLink ? (
         <CustomLink to={`/posts/${postid}`}>
           <Container>
-            <CardContainer>
-              <Caption>
+            <CardContainer containerWidth={containerWidth}>
+              <UserNameDiv>
                 <h5>@{username}</h5>
-              </Caption>
+              </UserNameDiv>
               <CenterDiv>
                 <div>
                   <IMG
                     src={img_url}
                     alt={altText}
                     style={{ borderRadius: "10px" }}
+                    width={width}
+                    height={height}
                   />
                 </div>
               </CenterDiv>
@@ -83,10 +50,10 @@ const Card = ({
         </CustomLink>
       ) : (
         <Container>
-          <CardContainer>
-            <SpaceOutDiv>
+          <CardContainer containerWidth={containerWidth}>
+            <UserNameDiv>
               <h5>@{username}</h5>
-            </SpaceOutDiv>
+            </UserNameDiv>
             <CenterDiv>
               <div>
                 <IMG
@@ -144,4 +111,45 @@ interface ICard {
   first_name?: string;
   last_name?: string;
   isLink?: boolean;
+  width?: number;
+  height?: number;
+  containerWidth?: number;
+}
+interface CaptionProps {
+  paddingTop?: number;
+}
+
+const CenterDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const FlexEndDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+const CardContainer = styled.div<ContainerProps>`
+  width: ${(props) => props.containerWidth || 95}vw;
+  background-color: rgba(15, 15, 15, 0.4);
+  border: 5px solid rgba(15, 15, 15, 0.4);
+  border-radius: 10px;
+  padding: 1rem;
+`;
+const Caption = styled.div<CaptionProps>`
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 1rem;
+`;
+const CustomLink = styled(Link)`
+  text-decoration: none;
+`;
+const UserNameDiv = styled.div`
+  margin-left: 10%;
+  margin-bottom: 1.5rem;
+`;
+const IMG = styled.img`
+  width: ${(props) => props.width || 75}vw;
+  height: ${(props) => props.height || 75}vw;
+`;
+interface ContainerProps {
+  containerWidth?: number;
 }

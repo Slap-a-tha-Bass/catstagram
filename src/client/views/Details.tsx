@@ -29,6 +29,9 @@ const Details = () => {
           username={post.username}
           first_name={post.first_name}
           last_name={post.last_name}
+          width={90}
+          height={90}
+          containerWidth={100}
         />
       )}
     </div>
