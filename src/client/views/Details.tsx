@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { IPost } from "../../server/types";
+import { IComments, IPost } from "../../server/types";
 import Card from "../components/Card";
 import apiService from "../utils/api-service";
 
 const Details = () => {
   const { postid } = useParams<{ postid: string }>();
   const [post, setPost] = useState<IPost>(null);
+  const [comments, setComments] = useState<IComments[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    apiService(`/api/posts/${postid}`).then((posts) => {
-      setPost(posts.rows[0]);
-      setIsLoaded(true);
-    });
+    let postDetails = null;
+    apiService(`/api/posts/${postid}`)
+      .then((posts) => {
+        postDetails = posts.rows[0];
+        return apiService(`/api/comments/posts/${postid}`)
+      })
+      .then((comments) => {
+        setComments(comments);
+        setPost(postDetails);
+        setIsLoaded(true);
+        console.log({ comments, postDetails });
+      });
   }, [postid]);
 
   return (

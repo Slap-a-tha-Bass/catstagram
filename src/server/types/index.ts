@@ -45,4 +45,6 @@ export interface IComments {
   post_id?: string;
   content?: string;
   _created?: Date;
+  username?: string;
+  rows?: [];
 }

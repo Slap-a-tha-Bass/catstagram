@@ -6,8 +6,11 @@ import { IComments, ReqUser } from "../../types";
 
 const router = Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/posts/:postid", async (req, res, next) => {
+  const { postid } = req.params;
   try {
+      const post_comments = await db.post_comments(postid);
+      res.json(post_comments.rows);
   } catch (error) {
     res
       .status(500)
@@ -28,7 +31,7 @@ router.post(
         content,
       };
       await db.insert_comment(newComment);
-      res.json({ message: "Successfully commented on post!", id})
+      res.json({ message: "Successfully commented on post!", id });
     } catch (error) {
       res
         .status(500)
