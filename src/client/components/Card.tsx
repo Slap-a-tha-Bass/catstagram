@@ -5,11 +5,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { FaEllipsisH, FaChevronRight, FaTrashAlt } from "react-icons/fa";
 import { Button } from "../views/Login";
 import { LI, UL } from "./Navbar";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import { IComments } from "../../server/types";
 
 const Card = ({
   img_url,
@@ -21,6 +17,7 @@ const Card = ({
   width,
   height,
   containerWidth,
+  comments,
 }: ICard) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -47,6 +44,16 @@ const Card = ({
               <Caption>{caption}</Caption>
             </CardContainer>
           </Container>
+          <CenterDiv>
+            <CommentContainer>
+              {comments?.map((comment) => (
+                <div key={comment.id}>
+                  <Username_Comment>{comment.username}</Username_Comment>
+                  {comment.content}
+                </div>
+              ))}
+            </CommentContainer>
+          </CenterDiv>
         </CustomLink>
       ) : (
         <Container>
@@ -110,6 +117,7 @@ interface ICard {
   username?: string;
   first_name?: string;
   last_name?: string;
+  comments?: IComments[];
   isLink?: boolean;
   width?: number;
   height?: number;
@@ -118,7 +126,13 @@ interface ICard {
 interface CaptionProps {
   paddingTop?: number;
 }
-
+interface ContainerProps {
+  containerWidth?: number;
+}
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 const CenterDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -150,6 +164,12 @@ const IMG = styled.img`
   width: ${(props) => props.width || 75}vw;
   height: ${(props) => props.height || 75}vw;
 `;
-interface ContainerProps {
-  containerWidth?: number;
-}
+const CommentContainer = styled.div`
+  margin-top: 1rem;
+  width: 90%;
+  border-radius: 10px;
+`;
+const Username_Comment = styled.span`
+  font-weight: bold;
+  margin-right: 0.5rem;
+`;

@@ -21,7 +21,6 @@ const Details = () => {
         setComments(comments);
         setPost(postDetails);
         setIsLoaded(true);
-        console.log({ comments, postDetails });
       });
   }, [postid]);
 
@@ -41,6 +40,7 @@ const Details = () => {
           width={90}
           height={90}
           containerWidth={100}
+          comments={comments}
         />
       )}
     </div>
