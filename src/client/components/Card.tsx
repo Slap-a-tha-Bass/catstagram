@@ -137,7 +137,7 @@ const CenterDiv = styled.div`
   display: flex;
   justify-content: center;
 `;
-const FlexEndDiv = styled.div`
+export const FlexEndDiv = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
@@ -152,6 +152,7 @@ const Caption = styled.div<CaptionProps>`
   margin-left: 10%;
   margin-right: 10%;
   padding-top: 1rem;
+  font-size: 1.5rem;
 `;
 const CustomLink = styled(Link)`
   text-decoration: none;
@@ -168,6 +169,7 @@ const CommentContainer = styled.div`
   margin-top: 1rem;
   width: 90%;
   border-radius: 10px;
+  font-size: 1.5rem;
 `;
 const Username_Comment = styled.span`
   font-weight: bold;

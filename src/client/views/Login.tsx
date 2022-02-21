@@ -64,15 +64,17 @@ export const CenterDiv = styled.div`
 `;
 export const Label = styled.label`
   font-size: 1.5rem;
+  display: block;
 `;
 export const Input = styled.input<InputProps>`
   padding: 0.5rem;
   margin: 0.5rem;
-  width: ${props => props.width || 350}px;
+  width: ${(props) => props.width || 350}px;
+  font-size: 1.5rem;
 `;
 export const Button = styled.button<ButtonProps>`
   padding: ${(props) => props.padding || 1}rem;
-  margin-top: ${props => props.marginTop || 1}rem;
+  margin-top: ${(props) => props.marginTop || 1}rem;
   font-family: monospace;
   background-color: ${(props) => props.bgColor || "white"};
   font-size: ${(props) => props.fontSize || 1.5}rem;
@@ -90,10 +92,11 @@ export const Form = styled.form`
 export const H1 = styled.h1`
   margin-top: 2rem;
 `;
-export const TextArea = styled.textarea`
+export const TextArea = styled.textarea<InputProps>`
   padding: 0.5rem;
   margin: 0.5rem;
-  width: 350px;
+  width: ${(props) => props.width || 350}px;
+  font-size: 1.5rem;
 `;
 
 interface ButtonProps {
