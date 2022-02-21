@@ -7,6 +7,10 @@ const get_posts = () =>
   Query<Posts[]>(
     "SELECT posts.*, catstagram.users.username, catstagram.users.first_name, catstagram.users.last_name FROM catstagram.posts JOIN catstagram.users ON users.id = catstagram.posts.user_id ORDER BY _created DESC"
   );
+  const get_comments_per_post = () =>
+  Query<Posts[]>(
+    "SELECT posts.*, COUNT(*) as num_of_comments FROM catstagram.posts JOIN catstagram.users ON users.id = catstagram.posts.user_id JOIN catstagram.comments ON catstagram.comments.post_id = catstagram.posts.id GROUP BY catstagram.posts.id ORDER BY _created DESC"
+  );
 const get_one_post = (id: string) =>
   Query(
     `SELECT posts.*, catstagram.users.username, catstagram.users.first_name, catstagram.users.last_name FROM catstagram.posts JOIN catstagram.users ON users.id = catstagram.posts.user_id WHERE catstagram.posts.id = '${id}'`
@@ -41,4 +45,5 @@ export default {
   update,
   destroy,
   search,
+  get_comments_per_post
 };

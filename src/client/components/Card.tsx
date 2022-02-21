@@ -18,6 +18,7 @@ const Card = ({
   height,
   containerWidth,
   comments,
+  num_of_comments,
 }: ICard) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -44,6 +45,7 @@ const Card = ({
               <Caption>{caption}</Caption>
             </CardContainer>
           </Container>
+          <Caption>{num_of_comments}</Caption>
           <CenterDiv>
             <CommentContainer>
               {comments?.map((comment) => (
@@ -122,6 +124,7 @@ interface ICard {
   width?: number;
   height?: number;
   containerWidth?: number;
+  num_of_comments?: number;
 }
 interface CaptionProps {
   paddingTop?: number;

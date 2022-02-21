@@ -20,6 +20,16 @@ router.get("/search", async (req, res, next) => {
       .json({ message: "Error in posts.ts", error: error.message });
   }
 });
+router.get("/numofcomments", async (req, res, next) => {
+  try {
+    const posts = await db.get_comments_per_post();
+    res.json(posts);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error in posts.ts", error: error.message });
+  }
+});
 // * router for current user
 
 router.get("/:postid", async (req, res, next) => {

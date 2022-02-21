@@ -13,6 +13,7 @@ const FlexWrap = styled.div`
 const Posts = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [numOfComments, setNumOfComments] = useState<number>();
 
   useEffect(() => {
     apiService("/api/posts").then((posts) => {
@@ -20,6 +21,7 @@ const Posts = () => {
       setIsLoaded(true);
     });
   }, []);
+
   if (isLoaded && posts && posts.length === 0)
     return (
       <CenterDiv>
@@ -46,6 +48,7 @@ const Posts = () => {
             username={post.username}
             first_name={post.first_name}
             last_name={post.last_name}
+            num_of_comments={numOfComments}
           />
         ))}
     </div>
