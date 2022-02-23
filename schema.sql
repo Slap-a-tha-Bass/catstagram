@@ -1,29 +1,48 @@
 -- Table: catstagram.users
 
-DROP TABLE IF EXISTS catstagram.users;
-
 CREATE TABLE IF NOT EXISTS catstagram.users
 (
-    id VARCHAR(60) NOT NULL,
-    first_name VARCHAR(60),
-    last_name VARCHAR(60),
-    username VARCHAR(60) NOT NULL UNIQUE,
-    email VARCHAR(60) NOT NULL UNIQUE,
-    password VARCHAR(60) NOT NULL,
-    "isVisible" SMALLINT DEFAULT 1,
-    _created TIMESTAMP DEFAULT NOW(),
-    CONSTRAINT users_pkey PRIMARY KEY (id)
+    id character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    first_name character varying(60) COLLATE pg_catalog."default",
+    last_name character varying(60) COLLATE pg_catalog."default",
+    username character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    email character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    "isVisible" smallint DEFAULT 1,
+    _created timestamp without time zone DEFAULT now(),
+    CONSTRAINT users_pkey PRIMARY KEY (id),
+    CONSTRAINT users_email_key UNIQUE (email),
+    CONSTRAINT users_username_key UNIQUE (username)
 )
 
-ALTER TABLE IF EXISTS catstagram.users
-    OWNER to postgres_admin;
-
-CREATE TABLE IF EXISTS catstagram.posts (
-    id VARCHAR(60) NOT NULL,
-    user_id VARCHAR(60) NOT NULL,
-    img_url VARCHAR(255) NOT NULL,
-    caption VARCHAR(144) NOT NULL,
-    _created TIMESTAMP DEFAULT NOW(),
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
+CREATE TABLE IF NOT EXISTS catstagram.posts
+(
+    id character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    user_id character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    img_url character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    caption character varying(144) COLLATE pg_catalog."default" NOT NULL,
+    _created timestamp without time zone DEFAULT now(),
+    CONSTRAINT posts_pkey PRIMARY KEY (id),
+    CONSTRAINT user_id FOREIGN KEY (user_id)
+        REFERENCES catstagram.users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+CREATE TABLE IF NOT EXISTS catstagram.comments
+(
+    id character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    user_id character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    content character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    _created time without time zone DEFAULT now(),
+    post_id character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT comments_pkey PRIMARY KEY (id),
+    CONSTRAINT post_id FOREIGN KEY (post_id)
+        REFERENCES catstagram.posts (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT user_id FOREIGN KEY (user_id)
+        REFERENCES catstagram.users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
