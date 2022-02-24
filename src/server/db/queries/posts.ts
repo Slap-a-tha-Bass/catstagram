@@ -12,11 +12,11 @@ const get_posts = () =>
       `
       SELECT 
         posts.*,
-        (SELECT COUNT(*) FROM catstagram.comments 
-        JOIN catstagram.posts 
-          ON catstagram.posts.id = catstagram.comments.post_id) as num_of_comments
+        COUNT(comments.id) as num_of_comments
       FROM catstagram.posts 
         JOIN catstagram.users ON users.id = catstagram.posts.user_id
+        LEFT JOIN catstagram.comments 
+          ON catstagram.comments.post_id = catstagram.posts.id
       GROUP BY catstagram.posts.id
       ORDER BY _created DESC
       `

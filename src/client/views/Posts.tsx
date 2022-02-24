@@ -13,7 +13,7 @@ const FlexWrap = styled.div`
 const Posts = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [numOfComments, setNumOfComments] = useState<number>();
+  const [numOfComments, setNumOfComments] = useState<[]>([]);
 
   useEffect(() => {
     apiService("/api/posts").then((posts) => {
@@ -21,7 +21,23 @@ const Posts = () => {
       setIsLoaded(true);
     });
   }, []);
-
+  useEffect(() => {
+    let postDetails: any = null;
+    apiService(`/api/posts`)
+      .then((posts) => {
+        postDetails = posts.rows;
+        return apiService(`/api/posts/numofcomments`);
+      })
+      .then((comments) => {
+        const commentsArray = comments.rows;
+        setNumOfComments(
+          commentsArray ? commentsArray.map((num) => num.num_of_comments) : null
+        );
+        setPosts(postDetails);
+        setIsLoaded(true);
+      });
+  }, []);
+  console.log({ numOfComments });
   if (isLoaded && posts && posts.length === 0)
     return (
       <CenterDiv>
@@ -37,7 +53,7 @@ const Posts = () => {
   return (
     <div>
       {isLoaded &&
-        posts?.map((post) => (
+        posts?.map((post, index) => (
           <Card
             isLink
             key={post.id}
@@ -48,7 +64,7 @@ const Posts = () => {
             username={post.username}
             first_name={post.first_name}
             last_name={post.last_name}
-            num_of_comments={numOfComments}
+            num_of_comments={numOfComments[index]}
           />
         ))}
     </div>

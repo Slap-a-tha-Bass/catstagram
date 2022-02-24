@@ -43,9 +43,13 @@ const Card = ({
                 </div>
               </CenterDiv>
               <Caption>{caption}</Caption>
+              {num_of_comments == 1 ? (
+                <Caption>{num_of_comments} comment</Caption>
+              ) : (
+                <Caption>{num_of_comments} comments</Caption>
+              )}
             </CardContainer>
           </Container>
-          <Caption>{num_of_comments}</Caption>
           <CenterDiv>
             <CommentContainer>
               {comments?.map((comment) => (
