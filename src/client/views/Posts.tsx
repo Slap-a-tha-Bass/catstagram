@@ -31,7 +31,7 @@ const Posts = () => {
       .then((comments) => {
         const commentsArray = comments.rows;
         setNumOfComments(
-          commentsArray ? commentsArray.map((num) => num.num_of_comments) : null
+          commentsArray ? commentsArray.map((num: any) => num.num_of_comments) : null
         );
         setPosts(postDetails);
         setIsLoaded(true);
