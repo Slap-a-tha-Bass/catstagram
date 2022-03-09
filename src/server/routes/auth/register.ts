@@ -19,12 +19,13 @@ router.post("/", async (req, res, next) => {
       id,
       first_name,
       last_name,
-      username: username.toLowerCase(),
+      username,
       email,
       password: hashed,
     };
     const register = await db.create_user(newUser);
     createRegisterToken(register, email, res);
+    console.log({register});
   } catch (error) {
     res
       .status(500)
