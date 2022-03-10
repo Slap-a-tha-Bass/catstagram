@@ -17,6 +17,7 @@ const Register = () => {
     await apiService("/auth/register", "POST", values);
     navigate("/login");
   };
+  console.log({values});
   return (
     <div>
       <CenterDiv>
