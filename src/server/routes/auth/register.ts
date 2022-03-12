@@ -25,7 +25,6 @@ router.post("/", async (req, res, next) => {
     };
     const register = await db.create_user(newUser);
     createRegisterToken(register, email, res);
-    console.log({ newUser });
   } catch (error) {
     res
       .status(500)
